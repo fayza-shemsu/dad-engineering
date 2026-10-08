@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #111111;
+  --color-secondary: #4a4a4a;
+  --color-accent: #E10600;
+  --color-accent-teal: #0d9488;
+  --font-heading: "Barlow Condensed", "Oswald", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+:root {
+  --hero-brightness: 1.05;
+  --hero-contrast: 1.08;
+  --hero-saturate: 1.1;
+  --vignette-color: rgba(0, 0, 0, 0.4);
+  --glow-color: rgba(255, 120, 0, 0.15);
+}
+
+@layer base {
+  body {
+    @apply bg-white text-gray-900 font-body antialiased;
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading uppercase font-bold tracking-wider;
+  }
+}
+
+@layer utilities {
+  .cinematic-image {
+    filter: brightness(var(--hero-brightness)) contrast(var(--hero-contrast)) saturate(var(--hero-saturate));
+  }
+  
+  .vignette-overlay {
+    background: radial-gradient(circle, transparent 40%, var(--vignette-color) 150%);
+  }
+  
+  .warm-glow {
+    background: radial-gradient(circle at 10% 20%, var(--glow-color) 0%, transparent 60%);
+  }
+
+  .light-sweep {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.05), transparent);
+    animation: sweep 10s infinite linear;
+    pointer-events: none;
+  }
+
+  @keyframes sweep {
+    0% { left: -100%; }
+    50% { left: 200%; }
+    100% { left: 200%; }
+  }
+}
