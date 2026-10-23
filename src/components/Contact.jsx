@@ -12,19 +12,25 @@ const Contact = () => {
     setLoading(true);
     setStatus('');
     
-    const formData = {
-      name: e.target.name.value,
-      company: e.target.company.value,
-      phone: e.target.phone.value,
-      email: e.target.email.value,
-      service: e.target.service.value,
-      message: e.target.message.value,
+    const form = e.currentTarget;
+    const formValues = {
+      name: form.name.value,
+      company: form.company.value,
+      phone: form.phone.value,
+      email: form.email.value,
+      service: form.service.value,
+      message: form.message.value,
+      _gotcha: form._gotcha?.value || '',
     };
     
     try {
-      await sendInquiry(formData);
-      setStatus('success');
-      e.target.reset();
+      const result = await sendInquiry(formValues);
+      if (result && result.ok === true) {
+        setStatus('success');
+        form.reset();
+      } else {
+        setStatus('error');
+      }
     } catch (err) {
       setStatus('error');
     } finally {
@@ -95,6 +101,14 @@ const Contact = () => {
 
           <div className="bg-white p-8 md:p-10 rounded-[24px] shadow-sm border border-gray-100">
             <form onSubmit={handleSubmit} className="space-y-5">
+              <input
+                type="text"
+                name="_gotcha"
+                tabIndex={-1}
+                autoComplete="off"
+                style={{ display: 'none' }}
+                aria-hidden="true"
+              />
               <div>
                 <label className="block text-sm font-bold text-gray-900 mb-1">Name <span className="text-[#E10600]">*</span></label>
                 <input required name="name" type="text" placeholder="Your full name" className="w-full p-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500/20 focus:border-red-500 transition-colors" />
@@ -145,7 +159,23 @@ const Contact = () => {
               )}
               {status === 'error' && (
                 <div className="mt-4 p-4 bg-red-50 text-red-800 border border-red-200 rounded-xl text-center font-medium">
-                  Something went wrong. Please try again or call us.
+                  We could not send your message. Please call{' '}
+                  <a
+                    href={`tel:${content.company.phone.replace(/[^+\d]/g, '')}`}
+                    className="underline font-bold hover:text-red-950"
+                  >
+                    +251 911 406 719
+                  </a>{' '}
+                  or message us on{' '}
+                  <a
+                    href={content.company.social.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline font-bold hover:text-red-950"
+                  >
+                    WhatsApp
+                  </a>
+                  .
                 </div>
               )}
             </form>
