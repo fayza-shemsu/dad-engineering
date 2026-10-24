@@ -27,7 +27,7 @@ const About = () => {
             <div className="mb-10">
               <h3 className="text-2xl font-heading font-bold text-gray-900 mb-4">Leadership & Excellence</h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Founded by <strong>{content.company.owner}</strong>, and managed by <strong>{content.company.managingDirector}</strong>, our facility combines experienced leadership with a team of skilled craftsmen dedicated to executing world-class solutions.
+                Founded by <strong>{content.company.owner}</strong>, our facility combines experienced leadership with a team of skilled craftsmen dedicated to executing world-class solutions.
               </p>
               <ul className="space-y-4">
                 <li className="flex items-start text-gray-700">
