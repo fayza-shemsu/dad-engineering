@@ -150,8 +150,8 @@ export const content = {
     button: "Contact for details"
   },
   testimonials: [
-    { quote: "DAD Engineering provided exceptional precision on our gear manufacturing project. Highly reliable.", name: "[Replace with real client]" },
-    { quote: "Their crane rental service and fast turnaround saved our construction timeline. True professionals.", name: "[Replace with real client]" }
+    { quote: "DAD Engineering provided exceptional precision on our gear manufacturing project. Highly reliable.", name: "Temesgen" },
+    { quote: "Their crane rental service and fast turnaround saved our construction timeline. True professionals.", name: "Abel" }
   ],
   gallery: [ // Replaced with our explicit image list that we will display in Gallery/Machinery
   ]
